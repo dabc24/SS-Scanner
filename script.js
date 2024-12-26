@@ -18,15 +18,26 @@ const failureBeep = new Audio('failure-beep.mp3');  // Path to the failure beep 
 // Access the device camera
 async function startCamera() {
   try {
-    const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } });
+    const stream = await navigator.mediaDevices.getUserMedia({
+      video: {
+        facingMode: "environment", // Use the rear camera
+        width: { ideal: 1280 }, // Set ideal width
+        height: { ideal: 720 }, // Set ideal height
+      }
+    });
     video.srcObject = stream;
   } catch (err) {
     console.error('Error accessing camera: ', err);
   }
 }
 
-// Initialize barcode scanning with QuaggaJS
 function initScanner() {
+  // Ensure the video is available
+  if (!video.srcObject) {
+    console.error("Camera stream not available");
+    return;
+  }
+
   Quagga.init({
     inputStream: {
       name: "Live",
@@ -38,10 +49,10 @@ function initScanner() {
     },
   }, function(err) {
     if (err) {
-      console.log(err);
+      console.error('Quagga initialization failed:', err);
       return;
     }
-    Quagga.start(); // Start scanning
+    Quagga.start(); // Start scanning after initialization
   });
 
   Quagga.onDetected((result) => {
@@ -49,6 +60,7 @@ function initScanner() {
     handleScan(barcode);  // Process the scan result
   });
 }
+
 
 // Handle the scan result: recognized or not recognized
 function handleScan(barcode) {
