@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Barcode Scanner</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Barcode Scanner</h1>
+  <video id="camera" width="100%" height="auto" autoplay></video>
+  <button id="start-scan">Start Scan</button>
+  <div id="result">
+    <p><strong>Item: </strong><span id="item-name"></span></p>
+    <p><strong>Price: </strong><span id="item-price"></span></p>
+  </div>
+  <div>
+    <h2>Scanned Items</h2>
+    <ul id="scanned-items-list"></ul>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
