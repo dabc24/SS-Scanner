@@ -5,8 +5,11 @@ const resultContainer = document.getElementById('result');
 const itemName = document.getElementById('item-name');
 const itemPrice = document.getElementById('item-price');
 const scannedItemsList = document.getElementById('scanned-items-list');
+const totalPriceDisplay = document.getElementById('total-price');
+const resetButton = document.getElementById('reset-button');
 
 let scannedItems = [];
+let totalPrice = 0;
 
 // Access the device camera
 async function startCamera() {
@@ -24,17 +27,17 @@ function initScanner() {
     inputStream: {
       name: "Live",
       type: "LiveStream",
-      target: video,
+      target: video, // Targeting the video element
     },
     decoder: {
-      readers: ["code_128_reader", "ean_reader", "ean_8_reader", "upc_reader"],
+      readers: ["code_128_reader", "ean_reader", "ean_8_reader", "upc_reader"], // Barcode types
     },
   }, function(err) {
     if (err) {
       console.log(err);
       return;
     }
-    Quagga.start();
+    Quagga.start(); // Start scanning
   });
 
   Quagga.onDetected((result) => {
@@ -65,11 +68,14 @@ function fetchItemData(barcode) {
     });
 }
 
-// Track scanned items on the client-side
+// Track scanned items on the client-side and update total
 function updateScannedItems(item) {
   scannedItems.push(item);
+  totalPrice += item.price;
   localStorage.setItem('scannedItems', JSON.stringify(scannedItems));
+  localStorage.setItem('totalPrice', totalPrice.toFixed(2));
   displayScannedItems();
+  updateTotalPrice();
 }
 
 // Display list of scanned items
@@ -82,11 +88,32 @@ function displayScannedItems() {
   });
 }
 
-// Load previous scanned items from localStorage
+// Update the total price display
+function updateTotalPrice() {
+  totalPriceDisplay.textContent = `$${totalPrice.toFixed(2)}`;
+}
+
+// Load previous scanned items and total from localStorage
 function loadScannedItems() {
   const savedItems = JSON.parse(localStorage.getItem('scannedItems')) || [];
+  const savedTotalPrice = parseFloat(localStorage.getItem('totalPrice')) || 0;
+
   scannedItems = savedItems;
+  totalPrice = savedTotalPrice;
+  
   displayScannedItems();
+  updateTotalPrice();
+}
+
+// Reset the scanned items and total price
+function resetScannedItems() {
+  scannedItems = [];
+  totalPrice = 0;
+  localStorage.removeItem('scannedItems');
+  localStorage.removeItem('totalPrice');
+  
+  displayScannedItems();
+  updateTotalPrice();
 }
 
 // Start the camera and barcode scanner when the button is clicked
@@ -94,4 +121,9 @@ startScanButton.addEventListener('click', () => {
   loadScannedItems();
   initScanner();
   startCamera();
+});
+
+// Reset scanned items and total when reset button is clicked
+resetButton.addEventListener('click', () => {
+  resetScannedItems();
 });
