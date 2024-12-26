@@ -11,6 +11,10 @@ const resetButton = document.getElementById('reset-button');
 let scannedItems = [];
 let totalPrice = 0;
 
+// Load beep sounds
+const successBeep = new Audio('success-beep.mp3');  // Path to the success beep sound
+const failureBeep = new Audio('failure-beep.mp3');  // Path to the failure beep sound
+
 // Access the device camera
 async function startCamera() {
   try {
@@ -42,8 +46,19 @@ function initScanner() {
 
   Quagga.onDetected((result) => {
     const barcode = result.codeResult.code;
-    fetchItemData(barcode);
+    handleScan(barcode);  // Process the scan result
   });
+}
+
+// Handle the scan result: recognized or not recognized
+function handleScan(barcode) {
+  fetchItemData(barcode);
+  Quagga.stop();  // Stop scanning temporarily
+  video.classList.add('dim');  // Dim the video for 0.5 seconds
+  setTimeout(() => {
+    Quagga.start();  // Restart scanning
+    video.classList.remove('dim');  // Remove the dim effect
+  }, 500);  // Pause for 0.5 seconds
 }
 
 // Fetch item data from the mock-database.json file
@@ -53,10 +68,14 @@ function fetchItemData(barcode) {
     .then(database => {
       const item = database[barcode];
       if (item) {
+        // Item recognized
+        successBeep.play();  // Play success beep
         itemName.textContent = item.name;
         itemPrice.textContent = `$${item.price.toFixed(2)}`;
         updateScannedItems(item);
       } else {
+        // Item not recognized
+        failureBeep.play();  // Play failure beep
         itemName.textContent = "Item not found";
         itemPrice.textContent = "N/A";
       }
@@ -65,6 +84,7 @@ function fetchItemData(barcode) {
       console.error('Error fetching product data:', err);
       itemName.textContent = "Error fetching item";
       itemPrice.textContent = "N/A";
+      failureBeep.play();  // Play failure beep
     });
 }
 
@@ -114,6 +134,10 @@ function resetScannedItems() {
   
   displayScannedItems();
   updateTotalPrice();
+
+  // Clear the item and price displays
+  itemName.textContent = "";
+  itemPrice.textContent = "";
 }
 
 // Start the camera and barcode scanner when the button is clicked
