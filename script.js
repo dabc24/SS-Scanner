@@ -20,16 +20,19 @@ async function startCamera() {
   try {
     const stream = await navigator.mediaDevices.getUserMedia({
       video: {
-        facingMode: "environment", // Use the rear camera
-        width: { ideal: 1280 }, // Set ideal width
-        height: { ideal: 720 }, // Set ideal height
+        facingMode: "environment"
       }
     });
-    video.srcObject = stream;
+    if (stream) {
+      video.srcObject = stream; // Assign the video stream to the video element
+    } else {
+      console.error('Failed to get a video stream');
+    }
   } catch (err) {
     console.error('Error accessing camera: ', err);
   }
 }
+
 
 function initScanner() {
   // Ensure the video is available
