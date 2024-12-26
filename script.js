@@ -1,28 +1,68 @@
 // Access elements
 const video = document.getElementById('camera');
 const startScanButton = document.getElementById('start-scan');
+const cycleCameraButton = document.getElementById('cycle-camera');
 const resultContainer = document.getElementById('result');
 const itemName = document.getElementById('item-name');
 const itemPrice = document.getElementById('item-price');
 const scannedItemsList = document.getElementById('scanned-items-list');
 const totalPriceDisplay = document.getElementById('total-price');
 const resetButton = document.getElementById('reset-button');
-const dimOverlay = document.getElementById('dim-overlay'); // Dim overlay
-const successSound = document.getElementById('success-sound'); // Success beep
-const errorSound = document.getElementById('error-sound'); // Error beep
+const dimOverlay = document.getElementById('dim-overlay');
+const successSound = document.getElementById('success-sound');
+const errorSound = document.getElementById('error-sound');
 
 let scannedItems = [];
 let totalPrice = 0;
-let scanningPaused = false; // Flag to prevent multiple pauses
+let scanningPaused = false;
+let mediaStream;
+let currentCameraIndex = 0;  // Track which camera is currently being used
+let videoDevices = [];  // Store all video devices (cameras)
 
 // Access the device camera
 async function startCamera() {
   try {
-    const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } });
-    video.srcObject = stream;
+    // Get all devices
+    const devices = await navigator.mediaDevices.enumerateDevices();
+    videoDevices = devices.filter(device => device.kind === 'videoinput'); // Filter only video devices
+
+    if (videoDevices.length === 0) {
+      console.error('No video devices found');
+      return;
+    }
+
+    // Get the first camera
+    const constraints = {
+      video: {
+        deviceId: { exact: videoDevices[currentCameraIndex].deviceId }
+      }
+    };
+
+    // Stop any previous stream if exists
+    if (mediaStream) {
+      mediaStream.getTracks().forEach(track => track.stop());
+    }
+
+    // Start the new camera stream
+    mediaStream = await navigator.mediaDevices.getUserMedia(constraints);
+    video.srcObject = mediaStream;
   } catch (err) {
     console.error('Error accessing camera: ', err);
   }
+}
+
+// Cycle through the available cameras
+function cycleCamera() {
+  if (videoDevices.length === 0) {
+    console.log('No video devices available');
+    return;
+  }
+
+  // Update the current camera index
+  currentCameraIndex = (currentCameraIndex + 1) % videoDevices.length;
+
+  // Restart the camera with the new device
+  startCamera();
 }
 
 // Initialize barcode scanning with QuaggaJS
@@ -160,6 +200,9 @@ startScanButton.addEventListener('click', () => {
   initScanner();
   startCamera();
 });
+
+// Cycle through cameras when the cycle button is clicked
+cycleCameraButton.addEventListener('click', cycleCamera);
 
 // Reset scanned items, total, and UI when reset button is clicked
 resetButton.addEventListener('click', () => {
