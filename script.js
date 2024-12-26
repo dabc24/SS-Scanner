@@ -31,7 +31,10 @@ async function startCamera() {
       return;
     }
 
-    // Get the first camera
+    // Log available video devices for debugging
+    console.log("Available video devices:", videoDevices);
+
+    // Get the current camera and its deviceId
     const constraints = {
       video: {
         deviceId: { exact: videoDevices[currentCameraIndex].deviceId }
@@ -60,6 +63,9 @@ function cycleCamera() {
 
   // Update the current camera index
   currentCameraIndex = (currentCameraIndex + 1) % videoDevices.length;
+
+  // Log the index of the current camera for debugging
+  console.log("Current camera index:", currentCameraIndex);
 
   // Restart the camera with the new device
   startCamera();
@@ -172,39 +178,4 @@ function updateTotalPrice() {
 // Load previous scanned items and total from localStorage
 function loadScannedItems() {
   const savedItems = JSON.parse(localStorage.getItem('scannedItems')) || [];
-  const savedTotalPrice = parseFloat(localStorage.getItem('totalPrice')) || 0;
-
-  scannedItems = savedItems;
-  totalPrice = savedTotalPrice;
-  
-  displayScannedItems();
-  updateTotalPrice();
-}
-
-// Reset the scanned items and total price
-function resetScannedItems() {
-  scannedItems = [];
-  totalPrice = 0;
-  localStorage.removeItem('scannedItems');
-  localStorage.removeItem('totalPrice');
-  
-  displayScannedItems();
-  updateTotalPrice();
-  itemName.textContent = "";
-  itemPrice.textContent = "";
-}
-
-// Start the camera and barcode scanner when the button is clicked
-startScanButton.addEventListener('click', () => {
-  loadScannedItems();
-  initScanner();
-  startCamera();
-});
-
-// Cycle through cameras when the cycle button is clicked
-cycleCameraButton.addEventListener('click', cycleCamera);
-
-// Reset scanned items, total, and UI when reset button is clicked
-resetButton.addEventListener('click', () => {
-  resetScannedItems();
-});
+  co
