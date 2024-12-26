@@ -1,4 +1,4 @@
-// Access camera and start scanning
+// Access elements
 const video = document.getElementById('camera');
 const startScanButton = document.getElementById('start-scan');
 const resultContainer = document.getElementById('result');
@@ -7,13 +7,13 @@ const itemPrice = document.getElementById('item-price');
 const scannedItemsList = document.getElementById('scanned-items-list');
 const totalPriceDisplay = document.getElementById('total-price');
 const resetButton = document.getElementById('reset-button');
+const dimOverlay = document.getElementById('dim-overlay'); // Dim overlay
+const successSound = document.getElementById('success-sound'); // Success beep
+const errorSound = document.getElementById('error-sound'); // Error beep
 
 let scannedItems = [];
 let totalPrice = 0;
-
-// Load beep sounds
-const successBeep = new Audio('success-beep.mp3');  // Path to the success beep sound
-const failureBeep = new Audio('failure-beep.mp3');  // Path to the failure beep sound
+let scanningPaused = false; // Flag to prevent multiple pauses
 
 // Access the device camera
 async function startCamera() {
@@ -46,19 +46,10 @@ function initScanner() {
 
   Quagga.onDetected((result) => {
     const barcode = result.codeResult.code;
-    handleScan(barcode);  // Process the scan result
+    if (!scanningPaused) {
+      fetchItemData(barcode);
+    }
   });
-}
-
-// Handle the scan result: recognized or not recognized
-function handleScan(barcode) {
-  fetchItemData(barcode);
-  Quagga.stop();  // Stop scanning temporarily
-  video.classList.add('dim');  // Dim the video for 0.5 seconds
-  setTimeout(() => {
-    Quagga.start();  // Restart scanning
-    video.classList.remove('dim');  // Remove the dim effect
-  }, 500);  // Pause for 0.5 seconds
 }
 
 // Fetch item data from the mock-database.json file
@@ -68,24 +59,49 @@ function fetchItemData(barcode) {
     .then(database => {
       const item = database[barcode];
       if (item) {
-        // Item recognized
-        successBeep.play();  // Play success beep
         itemName.textContent = item.name;
         itemPrice.textContent = `$${item.price.toFixed(2)}`;
+        playSound('success');
         updateScannedItems(item);
+        pauseScanning();
+        dimScanner();
       } else {
-        // Item not recognized
-        failureBeep.play();  // Play failure beep
         itemName.textContent = "Item not found";
         itemPrice.textContent = "N/A";
+        playSound('error');
       }
     })
     .catch(err => {
       console.error('Error fetching product data:', err);
       itemName.textContent = "Error fetching item";
       itemPrice.textContent = "N/A";
-      failureBeep.play();  // Play failure beep
+      playSound('error');
     });
+}
+
+// Play sound based on recognition result
+function playSound(type) {
+  if (type === 'success') {
+    successSound.play();
+  } else {
+    errorSound.play();
+  }
+}
+
+// Pause scanning for 0.5 seconds
+function pauseScanning() {
+  scanningPaused = true;
+  setTimeout(() => {
+    scanningPaused = false;
+  }, 500);
+}
+
+// Dim the scanner screen for 0.5 seconds
+function dimScanner() {
+  dimOverlay.style.display = 'block';
+  setTimeout(() => {
+    dimOverlay.style.display = 'none';
+  }, 500);
 }
 
 // Track scanned items on the client-side and update total
@@ -134,8 +150,6 @@ function resetScannedItems() {
   
   displayScannedItems();
   updateTotalPrice();
-
-  // Clear the item and price displays
   itemName.textContent = "";
   itemPrice.textContent = "";
 }
@@ -147,7 +161,7 @@ startScanButton.addEventListener('click', () => {
   startCamera();
 });
 
-// Reset scanned items and total when reset button is clicked
+// Reset scanned items, total, and UI when reset button is clicked
 resetButton.addEventListener('click', () => {
   resetScannedItems();
 });
