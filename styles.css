@@ -9,15 +9,22 @@ body {
 }
 
 #camera {
-  width: 100%; /* Full width */
-  height: 33.33vh; /* 1/3 of the viewport height */
-  object-fit: cover; /* Ensure the video fills the area without distorting */
+  width: 100%;
+  height: 33.33vh;
+  object-fit: cover;
   margin-top: 0;
-  transition: opacity 0.5s ease; /* Smooth transition for dimming */
+  position: relative; /* Needed to position the overlay */
 }
 
-#camera.dim {
-  opacity: 0.3; /* Dim the video */
+#dim-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+  display: none; /* Initially hidden */
+  z-index: 10; /* Ensure it appears above the video */
 }
 
 #result {
