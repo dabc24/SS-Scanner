@@ -8,7 +8,7 @@
 </head>
 <body>
   <h1>Barcode Scanner</h1>
-  <video id="camera" width="100%" height="auto" autoplay></video>
+  <video id="camera" width="100%" autoplay></video>
   <button id="start-scan">Start Scan</button>
   <div id="result">
     <p><strong>Item: </strong><span id="item-name"></span></p>
@@ -18,7 +18,15 @@
     <h2>Scanned Items</h2>
     <ul id="scanned-items-list"></ul>
   </div>
+  <div>
+    <p><strong>Total: </strong><span id="total-price">$0.00</span></p>
+    <button id="reset-button">Reset</button>
+  </div>
+
+  <!-- Include QuaggaJS Library -->
   <script src="https://unpkg.com/quagga@0.12.1/dist/quagga.min.js"></script>
+  
+  <!-- Include your script after QuaggaJS -->
   <script src="script.js"></script>
 </body>
 </html>
