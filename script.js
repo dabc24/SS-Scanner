@@ -35,12 +35,13 @@ async function startCamera() {
 
 
 function initScanner() {
-  // Ensure the video is available
+  // Ensure the video feed is available
   if (!video.srcObject) {
     console.error("Camera stream not available");
     return;
   }
 
+  // Try initializing Quagga
   Quagga.init({
     inputStream: {
       name: "Live",
@@ -63,7 +64,6 @@ function initScanner() {
     handleScan(barcode);  // Process the scan result
   });
 }
-
 
 // Handle the scan result: recognized or not recognized
 function handleScan(barcode) {
