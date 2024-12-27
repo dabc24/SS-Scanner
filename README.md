@@ -55,7 +55,7 @@
     </ul>
     <h2>📜 License</h2>
     <p>
-        This project is open-source and licensed under the MIT License. Feel free to contribute or fork the repository.
+        This project is licensed under the GNU General Public License v3.0. 
     </p>
 </body>
 </html>
