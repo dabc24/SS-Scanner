@@ -62,14 +62,6 @@ async function populateCameraSelection() {
   }
 }
 
-// Handle camera selection change
-cameraSelect.addEventListener("change", () => {
-  const selectedDeviceId = cameraSelect.value;
-  if (selectedDeviceId) {
-    startCamera(selectedDeviceId);
-  }
-});
-
 // Fetch the mock database
 async function fetchMockDatabase() {
   try {
