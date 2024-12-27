@@ -54,7 +54,7 @@
     <h2>🛠️ Technology Stack</h2>
     <ul>
         <li><strong>Frontend:</strong> HTML, CSS, JavaScript</li>
-        <li><strong>Backend:</strong> JSON-based product database</li>
+        <li><strong>Backend:</strong> JSON-based product "database"</li>
         <li><strong>Deployment:</strong> GitHub Pages</li>
     </ul>
     <h2>📜 License</h2>
