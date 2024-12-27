@@ -12,23 +12,6 @@
     <p>
         <a href="https://dabc24.github.io/SS-Scanner/">Click Here to use</a>
     </p>
-    <h2>🎮 Game Description</h2>
-    <p>
-        Dive into the non-stop shopping frenzy inspired by the hit TV show! With the <strong>SS Scanner</strong>, you can:
-    </p>
-    <ul>
-        <li><strong>Answer Trivia Questions:</strong> Win valuable seconds to extend your time in the Big Sweep.</li>
-        <li><strong>Compete in the Big Sweep:</strong> Dash through virtual aisles and grab the most expensive items to fill your trolley.</li>
-        <li><strong>Scan Your Items:</strong> Use our free scanner to identify the products and calculate your cart’s total.</li>
-    </ul>
-    <h2>🛒 Features</h2>
-    <ul>
-        <li><strong>Question-Based Time Rewards:</strong> Answer questions to earn more time for your sweep.</li>
-        <li><strong>Big Sweep Excitement:</strong> Race against time to grab high-value items in a frantic, virtual shopping spree.</li>
-        <li><strong>Product Database:</strong> A rich collection of items to scan and identify their prices.</li>
-        <li><strong>Inspired by the TV Show:</strong> Includes familiar question categories and themes.</li>
-    </ul>
-    <h2>🎯 Why Choose SS Scanner?</h2>
     <p>
         The original Gamestart app introduced a yearly subscription model, but our project aims to keep the fun free and accessible to all fans of the Supermarket Sweep experience.
     </p>
