@@ -1,229 +1,141 @@
 // Access elements
 const video = document.getElementById('camera');
+const cameraSelect = document.getElementById('camera-select');
 const startScanButton = document.getElementById('start-scan');
-const cycleCameraButton = document.getElementById('cycle-camera');
-const resultContainer = document.getElementById('result');
-const itemName = document.getElementById('item-name');
-const itemPrice = document.getElementById('item-price');
-const scannedItemsList = document.getElementById('scanned-items-list');
-const totalPriceDisplay = document.getElementById('total-price');
 const resetButton = document.getElementById('reset-button');
-const dimOverlay = document.getElementById('dim-overlay');
-const successSound = document.getElementById('success-sound');
-const errorSound = document.getElementById('error-sound');
+let mediaStream = null;
+let videoDevices = []; // Store all video devices
+let mockDatabase = {}; // Store mock database after fetching
 
-let scannedItems = [];
-let totalPrice = 0;
-let scanningPaused = false;
-let mediaStream;
-let currentCameraIndex = 0;  // Track which camera is currently being used
-let videoDevices = [];  // Store all video devices (cameras)
-
-// Stop any existing media stream tracks
+// Stop the current video stream
 function stopCurrentStream() {
   if (mediaStream) {
-    mediaStream.getTracks().forEach(track => {
-      track.stop();  // Stop each track of the current stream
-    });
-    console.log("Current camera stream stopped.");
+    mediaStream.getTracks().forEach(track => track.stop());
+    mediaStream = null;
+    console.log("Stopped current camera stream.");
   }
 }
 
-// Access the device camera
-async function startCamera() {
+// Start the camera with the selected device
+async function startCamera(deviceId) {
   try {
-    // Get all devices
-    const devices = await navigator.mediaDevices.enumerateDevices();
-    videoDevices = devices.filter(device => device.kind === 'videoinput'); // Filter only video devices
-
-    if (videoDevices.length === 0) {
-      console.error('No video devices found');
-      return;
-    }
-
-    // Log available video devices for debugging
-    console.log("Available video devices:", videoDevices);
-
-    // Stop current camera stream before starting a new one
+    // Stop the current stream before starting a new one
     stopCurrentStream();
 
-    // Get the current camera and its deviceId
+    // Set video constraints
     const constraints = {
-      video: {
-        deviceId: { exact: videoDevices[currentCameraIndex].deviceId }
-      }
+      video: { deviceId: { exact: deviceId } },
     };
 
     // Start the new camera stream
     mediaStream = await navigator.mediaDevices.getUserMedia(constraints);
-    video.srcObject = mediaStream;  // Set video stream as the source for the video element
+    video.srcObject = mediaStream;
 
-    console.log("Camera started with device:", videoDevices[currentCameraIndex].label);
+    console.log("Camera started with device:", deviceId);
   } catch (err) {
-    console.error('Error accessing camera: ', err);
-    if (err.name === "NotReadableError") {
-      alert("Camera is in use or not accessible. Please close other apps using the camera.");
-    }
+    console.error("Error accessing camera:", err);
+    alert("Unable to access the selected camera.");
   }
 }
 
-// Cycle through the available cameras
-function cycleCamera() {
-  if (videoDevices.length === 0) {
-    console.log('No video devices available');
-    return;
-  }
+// Populate the camera selection dropdown
+async function populateCameraSelection() {
+  try {
+    const devices = await navigator.mediaDevices.enumerateDevices();
+    videoDevices = devices.filter(device => device.kind === "videoinput");
 
-  // Update the current camera index
-  currentCameraIndex = (currentCameraIndex + 1) % videoDevices.length;
+    // Clear the dropdown
+    cameraSelect.innerHTML = "";
 
-  // Log the index of the current camera for debugging
-  console.log("Current camera index:", currentCameraIndex);
-
-  // Restart the camera with the new device
-  startCamera();
-}
-
-// Initialize barcode scanning with QuaggaJS
-function initScanner() {
-  Quagga.init({
-    inputStream: {
-      name: "Live",
-      type: "LiveStream",
-      target: video, // Targeting the video element
-    },
-    decoder: {
-      readers: ["code_128_reader", "ean_reader", "ean_8_reader", "upc_reader"], // Barcode types
-    },
-  }, function(err) {
-    if (err) {
-      console.log(err);
-      return;
-    }
-    Quagga.start(); // Start scanning
-  });
-
-  Quagga.onDetected((result) => {
-    const barcode = result.codeResult.code;
-    if (!scanningPaused) {
-      fetchItemData(barcode);
-    }
-  });
-}
-
-// Fetch item data from the mock-database.json file
-function fetchItemData(barcode) {
-  fetch('mock-database.json')
-    .then(response => response.json())
-    .then(database => {
-      const item = database[barcode];
-      if (item) {
-        itemName.textContent = item.name;
-        itemPrice.textContent = `$${item.price.toFixed(2)}`;
-        playSound('success');
-        updateScannedItems(item);
-        pauseScanning();
-        dimScanner();
-      } else {
-        itemName.textContent = "Item not found";
-        itemPrice.textContent = "N/A";
-        playSound('error');
-      }
-    })
-    .catch(err => {
-      console.error('Error fetching product data:', err);
-      itemName.textContent = "Error fetching item";
-      itemPrice.textContent = "N/A";
-      playSound('error');
+    // Populate dropdown with available cameras
+    videoDevices.forEach((device, index) => {
+      const option = document.createElement("option");
+      option.value = device.deviceId;
+      option.text = device.label || `Camera ${index + 1}`;
+      cameraSelect.appendChild(option);
     });
-}
 
-// Play sound based on recognition result
-function playSound(type) {
-  if (type === 'success') {
-    successSound.play();
-  } else {
-    errorSound.play();
+    console.log("Camera selection populated.");
+  } catch (err) {
+    console.error("Error populating camera selection:", err);
+    alert("Unable to retrieve camera devices.");
   }
 }
 
-// Pause scanning for 0.5 seconds
-function pauseScanning() {
-  scanningPaused = true;
-  setTimeout(() => {
-    scanningPaused = false;
-  }, 500);
+// Handle camera selection change
+cameraSelect.addEventListener("change", () => {
+  const selectedDeviceId = cameraSelect.value;
+  if (selectedDeviceId) {
+    startCamera(selectedDeviceId);
+  }
+});
+
+// Fetch the mock database
+async function fetchMockDatabase() {
+  try {
+    const response = await fetch('mock-database.json');
+    if (!response.ok) {
+      throw new Error('Failed to load the mock database.');
+    }
+    mockDatabase = await response.json();
+    console.log("Mock database loaded.");
+  } catch (err) {
+    console.error("Error loading mock database:", err);
+    alert("Unable to load the product database.");
+  }
 }
 
-// Dim the scanner screen for 0.5 seconds
-function dimScanner() {
-  dimOverlay.style.display = 'block';
-  setTimeout(() => {
-    dimOverlay.style.display = 'none';
-  }, 500);
+// Lookup barcode in the mock database
+function fetchItemData(barcode) {
+  const item = mockDatabase[barcode];
+  if (item) {
+    updateScannedItems(item);
+    console.log(`Scanned: ${item.name} - $${item.price.toFixed(2)}`);
+  } else {
+    console.log("Item not found for barcode:", barcode);
+    alert("Item not found.");
+  }
 }
 
-// Track scanned items on the client-side and update total
+// Track scanned items and update the display
+let scannedItems = [];
 function updateScannedItems(item) {
   scannedItems.push(item);
-  totalPrice += item.price;
-  localStorage.setItem('scannedItems', JSON.stringify(scannedItems));
-  localStorage.setItem('totalPrice', totalPrice.toFixed(2));
-  displayScannedItems();
-  updateTotalPrice();
+
+  // Update the UI
+  const scannedList = document.getElementById("scanned-items-list");
+  const listItem = document.createElement("li");
+  listItem.textContent = `${item.name} - $${item.price.toFixed(2)}`;
+  scannedList.appendChild(listItem);
+
+  // Update total
+  const totalPriceElement = document.getElementById("total-price");
+  const totalPrice = scannedItems.reduce((total, currentItem) => total + currentItem.price, 0);
+  totalPriceElement.textContent = `$${totalPrice.toFixed(2)}`;
 }
 
-// Display list of scanned items
-function displayScannedItems() {
-  scannedItemsList.innerHTML = '';
-  scannedItems.forEach(item => {
-    const li = document.createElement('li');
-    li.textContent = `${item.name} - $${item.price.toFixed(2)}`;
-    scannedItemsList.appendChild(li);
-  });
-}
-
-// Update the total price display
-function updateTotalPrice() {
-  totalPriceDisplay.textContent = `$${totalPrice.toFixed(2)}`;
-}
-
-// Load previous scanned items and total from localStorage
-function loadScannedItems() {
-  const savedItems = JSON.parse(localStorage.getItem('scannedItems')) || [];
-  const savedTotalPrice = parseFloat(localStorage.getItem('totalPrice')) || 0;
-
-  scannedItems = savedItems;
-  totalPrice = savedTotalPrice;
-  
-  displayScannedItems();
-  updateTotalPrice();
-}
-
-// Reset the scanned items and total price
-function resetScannedItems() {
+// Reset the application
+resetButton.addEventListener("click", () => {
+  stopCurrentStream();
   scannedItems = [];
-  totalPrice = 0;
-  localStorage.removeItem('scannedItems');
-  localStorage.removeItem('totalPrice');
-  
-  displayScannedItems();
-  updateTotalPrice();
-  itemName.textContent = "";
-  itemPrice.textContent = "";
+  document.getElementById("scanned-items-list").innerHTML = "";
+  document.getElementById("total-price").textContent = "$0.00";
+  console.log("Application reset.");
+});
+
+// Initialize the application
+async function init() {
+  await fetchMockDatabase();
+  await populateCameraSelection();
+
+  if (videoDevices.length > 0) {
+    // Start with the first available camera
+    startCamera(videoDevices[0].deviceId);
+    cameraSelect.value = videoDevices[0].deviceId;
+  } else {
+    alert("No cameras available.");
+  }
 }
 
-// Start the camera and barcode scanner when the button is clicked
-startScanButton.addEventListener('click', () => {
-  loadScannedItems();
-  initScanner();
-  startCamera();
-});
-
-// Cycle through cameras when the cycle button is clicked
-cycleCameraButton.addEventListener('click', cycleCamera);
-
-// Reset scanned items, total, and UI when reset button is clicked
-resetButton.addEventListener('click', () => {
-  resetScannedItems();
-});
+// Start the application on page load
+document.addEventListener("DOMContentLoaded", init);
