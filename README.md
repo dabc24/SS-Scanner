@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SS Scanner</title>
 </head>
 <body>
     <h1>SS Scanner</h1>
@@ -46,6 +45,11 @@
         <li>Add Big Sweep item cards</li>
         <li>Timer: With seporate timers for each team</li>
         <li>Buzzer to buzz in</li>
+    </ul>
+     <h2>⚠️ Known Issues:</h2>
+    <ul>
+        <li>Barcodes dont scan on Chrome Android</li>
+        <li>iOS Safari, you may need to refresh the page and click "Reduce Permissions"</li>
     </ul>
     <h2>🛠️ Technology Stack</h2>
     <ul>
