@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Barcode Scanner</title>
-    <script src="https://cdn.jsdelivr.net/npm/@zxing/browser@0.0.8/umd/index.min.js"></script>
+    <script src="https://unpkg.com/@zxing/library@latest"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -113,7 +113,7 @@
         resetButton.addEventListener('click', reset);
 
         const startScanner = async () => {
-            const codeReader = new ZXing.BrowserBarcodeReader();
+            const codeReader = new ZXing.BrowserMultiFormatReader();
 
             try {
                 const devices = await codeReader.listVideoInputDevices();
