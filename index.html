@@ -64,8 +64,8 @@
         <video id="video" autoplay></video>
     </div>
     <div id="output">
-        <div id="scanned-items"></div>
         <div class="total" id="total">Total: $0.00</div>
+        <div id="scanned-items"></div>
     </div>
     <button id="reset-button">Reset</button>
 
@@ -117,7 +117,9 @@
 
             try {
                 const devices = await codeReader.listVideoInputDevices();
-                const selectedDeviceId = devices[0]?.deviceId;
+                const backCamera = devices.find(device => device.label.toLowerCase().includes('back')) || devices[0];
+                const selectedDeviceId = backCamera?.deviceId;
+
                 if (!selectedDeviceId) throw new Error("No camera devices found");
 
                 await codeReader.decodeFromVideoDevice(selectedDeviceId, videoElement, async (result, err) => {
