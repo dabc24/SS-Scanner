@@ -3,8 +3,6 @@ const video = document.getElementById('camera');
 const cameraSelect = document.getElementById('camera-select');
 const startScanButton = document.getElementById('start-scan');
 const resetButton = document.getElementById('reset-button');
-const scannedItemsList = document.getElementById('scanned-items-list');
-const totalPriceDisplay = document.getElementById('total-price');
 let mediaStream = null;
 let videoDevices = []; // Store all video devices
 let mockDatabase = {}; // Store mock database after fetching
@@ -92,7 +90,6 @@ function fetchItemData(barcode) {
   const item = mockDatabase[barcode];
   if (item) {
     updateScannedItems(item);
-    dimScanner(); // Dim the screen for 0.5 seconds
     console.log(`Scanned: ${item.name} - $${item.price.toFixed(2)}`);
   } else {
     console.log("Item not found for barcode:", barcode);
@@ -100,24 +97,9 @@ function fetchItemData(barcode) {
   }
 }
 
-// Track scanned items and update the display
-let scannedItems = [];
-function updateScannedItems(item) {
-  scannedItems.push(item);
-
-  // Update the UI
-  const listItem = document.createElement("li");
-  listItem.textContent = `${item.name} - $${item.price.toFixed(2)}`;
-  scannedItemsList.appendChild(listItem);
-
-  // Update total price
-  const totalPrice = scannedItems.reduce((total, currentItem) => total + currentItem.price, 0);
-  totalPriceDisplay.textContent = `$${totalPrice.toFixed(2)}`;
-}
-
 // Dim the scanner screen for 0.5 seconds
 function dimScanner() {
-  const dimOverlay = document.getElementById('dim-overlay'); // Ensure the element exists
+  const dimOverlay = document.getElementById('dim-overlay'); // Ensure the element is accessed dynamically
   if (!dimOverlay) {
     console.error("Dim overlay element not found.");
     return;
@@ -129,12 +111,29 @@ function dimScanner() {
   }, 500);
 }
 
+// Track scanned items and update the display
+let scannedItems = [];
+function updateScannedItems(item) {
+  scannedItems.push(item);
+
+  // Update the UI
+  const scannedList = document.getElementById("scanned-items-list");
+  const listItem = document.createElement("li");
+  listItem.textContent = `${item.name} - $${item.price.toFixed(2)}`;
+  scannedList.appendChild(listItem);
+
+  // Update total
+  const totalPriceElement = document.getElementById("total-price");
+  const totalPrice = scannedItems.reduce((total, currentItem) => total + currentItem.price, 0);
+  totalPriceElement.textContent = `$${totalPrice.toFixed(2)}`;
+}
+
 // Reset the application
 resetButton.addEventListener("click", () => {
   stopCurrentStream();
   scannedItems = [];
-  scannedItemsList.innerHTML = "";
-  totalPriceDisplay.textContent = "$0.00";
+  document.getElementById("scanned-items-list").innerHTML = "";
+  document.getElementById("total-price").textContent = "$0.00";
   console.log("Application reset.");
 });
 
