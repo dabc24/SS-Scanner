@@ -8,7 +8,10 @@
 </head>
 <body>
   <h1>Barcode Scanner</h1>
+  <div style="position: relative; width: 100%; height: auto;">
   <video id="camera" width="100%" autoplay></video>
+  <div id="dim-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); display: none; z-index: 10;"></div>
+</div>
   <button id="start-scan">Start Scan</button>
   <button id="cycle-camera">Cycle Camera</button>
   <div id="result">
