@@ -19,6 +19,16 @@ let mediaStream;
 let currentCameraIndex = 0;  // Track which camera is currently being used
 let videoDevices = [];  // Store all video devices (cameras)
 
+// Stop any existing media stream tracks
+function stopCurrentStream() {
+  if (mediaStream) {
+    mediaStream.getTracks().forEach(track => {
+      track.stop();  // Stop each track of the current stream
+    });
+    console.log("Current camera stream stopped.");
+  }
+}
+
 // Access the device camera
 async function startCamera() {
   try {
@@ -34,6 +44,9 @@ async function startCamera() {
     // Log available video devices for debugging
     console.log("Available video devices:", videoDevices);
 
+    // Stop current camera stream before starting a new one
+    stopCurrentStream();
+
     // Get the current camera and its deviceId
     const constraints = {
       video: {
@@ -41,16 +54,16 @@ async function startCamera() {
       }
     };
 
-    // Stop any previous stream if exists
-    if (mediaStream) {
-      mediaStream.getTracks().forEach(track => track.stop());
-    }
-
     // Start the new camera stream
     mediaStream = await navigator.mediaDevices.getUserMedia(constraints);
-    video.srcObject = mediaStream;
+    video.srcObject = mediaStream;  // Set video stream as the source for the video element
+
+    console.log("Camera started with device:", videoDevices[currentCameraIndex].label);
   } catch (err) {
     console.error('Error accessing camera: ', err);
+    if (err.name === "NotReadableError") {
+      alert("Camera is in use or not accessible. Please close other apps using the camera.");
+    }
   }
 }
 
