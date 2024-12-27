@@ -68,7 +68,6 @@
         <div id="scanned-items"></div>
     </div>
     <button id="reset-button">Reset</button>
-    <button id="enableSound"> Enable Sound</button>
 
     <script>
         const mockDatabasePath = './mock-database.json';
@@ -165,10 +164,6 @@
                 alert("Unable to access the camera. Please ensure permissions are granted.");
             }
         };
-         $("#enableSound").click(function() {
-             beepFail.play();
-             beepSuccess.play();
-         });
         startScanner();
     </script>
 </body>
