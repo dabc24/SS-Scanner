@@ -61,7 +61,7 @@
 </head>
 <body>
     <div id="camera-container">
-        <video id="video" autoplay></video>
+        <video id="video" autoplay playsinline></video>
     </div>
     <div id="output">
         <div class="total" id="total">Total: $0.00</div>
@@ -116,10 +116,24 @@
             try {
                 const stream = await navigator.mediaDevices.getUserMedia({
                     video: {
-                        facingMode: { exact: "environment" }
+                        facingMode: "environment"
                     }
                 });
+
                 videoElement.srcObject = stream;
+
+                const videoTracks = stream.getVideoTracks();
+                const settings = videoTracks[0].getSettings();
+                console.log('Camera settings:', settings);
+
+                // Workaround for iOS Safari
+                videoElement.onloadedmetadata = () => {
+                    if (videoElement.videoWidth && videoElement.videoHeight) {
+                        const aspectRatio = videoElement.videoWidth / videoElement.videoHeight;
+                        videoElement.style.width = `${640}px`;
+                        videoElement.style.height = `${640 / aspectRatio}px`;
+                    }
+                };
 
                 const codeReader = new ZXing.BrowserMultiFormatReader();
                 await codeReader.decodeFromVideoDevice(null, videoElement, async (result, err) => {
