@@ -1,105 +1,666 @@
-{'0000000001': {'name': 'Aged Balsamic Vinegar', 'price': 12.59},
- '0000000002': {'name': 'Almond Butter', 'price': 11.49},
- '0000000003': {'name': 'Apple Pie', 'price': 7.99},
- '0000000004': {'name': 'Apples', 'price': 4.59},
- '0000000005': {'name': 'Asparagus', 'price': 2.99},
- '0000000006': {'name': 'Avocados', 'price': 4.99},
- '0000000007': {'name': 'Baby Formula', 'price': 33.99},
- '0000000008': {'name': 'Baby Wash', 'price': 3.99},
- '0000000009': {'name': 'Bagels', 'price': 2.99},
- '0000000010': {'name': 'Baguette', 'price': 4.49},
- '0000000011': {'name': 'Baked Beans', 'price': 4.49},
- '0000000012': {'name': 'Basa Fillet', 'price': 7.99},
- '0000000013': {'name': 'Batteries', 'price': 5.49},
- '0000000014': {'name': 'Beef Mince', 'price': 4.79},
- '0000000015': {'name': 'Beef Patties', 'price': 7.99},
- '0000000016': {'name': 'Beef Roast', 'price': 16.11},
- '0000000017': {'name': 'Bin Bags', 'price': 7.29},
- '0000000018': {'name': 'Bird Seed', 'price': 6.79},
- '0000000019': {'name': 'Blueberries', 'price': 2.99},
- '0000000020': {'name': 'Blueberry Muffins', 'price': 3.99},
- '0000000021': {'name': 'Brisket', 'price': 31.97},
- '0000000022': {'name': 'Burritos', 'price': 3.99},
- '0000000023': {'name': 'Butter', 'price': 4.29},
- '0000000024': {'name': 'Cake Mix', 'price': 1.59},
- '0000000025': {'name': 'Cantaloupe Melon', 'price': 2.5},
- '0000000026': {'name': 'Cashew Butter', 'price': 14.99},
- '0000000027': {'name': 'Cat Litter', 'price': 9.79},
- '0000000028': {'name': 'Cheddar Cheese', 'price': 4.99},
- '0000000029': {'name': 'Cheese Slices', 'price': 4.49},
- '0000000030': {'name': 'Chicken Nuggets', 'price': 5.29},
- '0000000031': {'name': 'Chocolate Cream Pie', 'price': 7.99},
- '0000000032': {'name': 'Chocolate Ice Cream', 'price': 5.49},
- '0000000033': {'name': 'Chocolate Pudding', 'price': 2.69},
- '0000000034': {'name': 'Cling Film', 'price': 3.99},
- '0000000035': {'name': 'Cod Fillet', 'price': 7.59},
- '0000000036': {'name': 'Coffee', 'price': 7.99},
- '0000000037': {'name': 'Cooked Prawns', 'price': 10.99},
- '0000000038': {'name': 'Cookie Dough', 'price': 4.99},
- '0000000039': {'name': 'Corn Chips', 'price': 3.69},
- '0000000040': {'name': 'Custard Tart', 'price': 3.69},
- '0000000041': {'name': 'Deodorant', 'price': 4.79},
- '0000000042': {'name': 'Dishwasher Tablets', 'price': 6.99},
- '0000000043': {'name': 'Dog Brush', 'price': 9.99},
- '0000000044': {'name': 'Doughnuts', 'price': 2.99},
- '0000000045': {'name': 'Dry Cat Food', 'price': 14.99},
- '0000000046': {'name': 'Dry Dog Food', 'price': 13.99},
- '0000000047': {'name': 'Dummies', 'price': 6.49},
- '0000000048': {'name': 'Eggs', 'price': 2.79},
- '0000000049': {'name': 'Electric Toothbrush', 'price': 40.62},
- '0000000050': {'name': 'Fabric Softener', 'price': 4.99},
- '0000000051': {'name': 'Filet Mignon', 'price': 12.99},
- '0000000052': {'name': 'Fish Fingers', 'price': 4.79},
- '0000000053': {'name': 'Fish Food', 'price': 5.49},
- '0000000054': {'name': 'Flour', 'price': 2.49},
- '0000000055': {'name': 'French Onion Dip', 'price': 2.49},
- '0000000056': {'name': 'Frozen Chips', 'price': 2.79},
- '0000000057': {'name': 'Frozen Pizza', 'price': 4.49},
- '0000000058': {'name': 'Fruit Juice', 'price': 2.99},
- '0000000059': {'name': 'Grapes', 'price': 5.98},
- '0000000060': {'name': 'Greek Yoghurt', 'price': 5.49},
- '0000000061': {'name': 'Guacamole', 'price': 3.99},
- '0000000062': {'name': 'Hamburger Buns', 'price': 2.69},
- '0000000063': {'name': 'Hot Dog Buns', 'price': 2.69},
- '0000000064': {'name': 'Houmous', 'price': 3.99},
- '0000000065': {'name': 'Ice Cream Sticks', 'price': 3.99},
- '0000000066': {'name': 'Iced Tea', 'price': 5.49},
- '0000000067': {'name': 'Jumbo Prawns', 'price': 14.99},
- '0000000068': {'name': 'King Crab Legs', 'price': 25.99},
- '0000000069': {'name': 'Kitchen Towels', 'price': 6.49},
- '0000000070': {'name': 'Kiwis', 'price': 4.99},
- '0000000071': {'name': 'Lasagna', 'price': 6.99},
- '0000000072': {'name': 'Lettuce', 'price': 1.59},
- '0000000073': {'name': 'Light Bulb', 'price': 10.99},
- '0000000074': {'name': 'Lobster Tail', 'price': 28.99},
- '0000000075': {'name': 'Macadamia Nuts', 'price': 29.99},
- '0000000076': {'name': 'Macaroni & Cheese', 'price': 4.99},
- '0000000077': {'name': 'Mangoes', 'price': 3.99},
- '0000000078': {'name': 'Manuka Honey', 'price': 27.99},
- '0000000079': {'name': 'Mayonnaise', 'price': 3.99},
- '0000000080': {'name': 'Meatless Meatballs', 'price': 4.99},
- '0000000081': {'name': 'Mouthwash', 'price': 5.79},
- '0000000082': {'name': 'Mozzarella Sticks', 'price': 6.59},
- '0000000083': {'name': 'Multivitamins', 'price': 10.79},
- '0000000084': {'name': 'Nappies', 'price': 24.99},
- '0000000085': {'name': 'Olive Oil', 'price': 5.19},
- '0000000086': {'name': 'Orange Juice', 'price': 3.99},
- '0000000087': {'name': 'Oranges', 'price': 4.99},
- '0000000088': {'name': 'Parmesan Cheese', 'price': 4.69},
- '0000000089': {'name': 'Pepperoni', 'price': 3.99},
- '0000000090': {'name': 'Pine Nuts', 'price': 15.24},
- '0000000091': {'name': 'Pistachio Nuts', 'price': 25.5},
- '0000000092': {'name': 'Pizza Buns', 'price': 4.29},
- '0000000093': {'name': 'Plant-based Bacon', 'price': 4.49},
- '0000000094': {'name': 'Plant-based Hot Dogs', 'price': 3.79},
- '0000000095': {'name': 'Plant-based Patties', 'price': 6.99},
- '0000000096': {'name': 'Pork Chops', 'price': 5.99},
- '0000000097': {'name': 'Pork Ribs', 'price': 13.25},
- '0000000098': {'name': 'Pork Sausages', 'price': 4.19},
- '0000000099': {'name': 'Potato Crisps', 'price': 3.99},
- '0000000100': {'name': 'Potatoes', 'price': 2.5},
- '0000000101': {'name': 'Potato Salad', 'price': 2.59},
- '0000000102': {'name': 'Prosciutto', 'price': 5.69},
- '0000000103': {'name': 'Puff Pastry', 'price': 3.49},
- '0000000104': {'name': 'Raspberries', 'price': 4.99},
- '0000000105': {'name': 'Razors', 'price': 15.99}}
+{
+    "31170307": {
+        "name": "Tea",
+        "price": 3.99
+    },
+    "21321627": {
+        "name": "Whole Salmon Fillet",
+        "price": 18.3
+    },
+    "65911631": {
+        "name": "Whole Salmon Fillet",
+        "price": 18.3
+    },
+    "19300191": {
+        "name": "Macaroni & Cheese",
+        "price": 4.99
+    },
+    "29137114": {
+        "name": "Cantaloupe Melon",
+        "price": 2.5
+    },
+    "40950648": {
+        "name": "Chocolate Pudding",
+        "price": 2.69
+    },
+    "95751061": {
+        "name": "Vanilla Ice Cream",
+        "price": 5.49
+    },
+    "03350874": {
+        "name": "Chocolate Cream Pie",
+        "price": 7.99
+    },
+    "17430883": {
+        "name": "Chocolate Ice Cream",
+        "price": 5.49
+    },
+    "30070783": {
+        "name": "Sliced Turkey Breast",
+        "price": 3.99
+    },
+    "58810057": {
+        "name": "Blueberries",
+        "price": 2.99
+    },
+    "50011438": {
+        "name": "Plant-based Bacon",
+        "price": 4.49
+    },
+    "70240436": {
+        "name": "Dishwasher Tablets",
+        "price": 6.99
+    },
+    "43230440": {
+        "name": "Tea",
+        "price": 3.99
+    },
+    "93431408": {
+        "name": "Meatless Meatballs",
+        "price": 4.99
+    },
+    "22401410": {
+        "name": "Plant-based Bacon",
+        "price": 4.49
+    },
+    "10241424": {
+        "name": "Plant-based Hot Dogs",
+        "price": 3.79
+    },
+    "89131114": {
+        "name": "Cantaloupe Melon",
+        "price": 2.5
+    },
+    "22371508": {
+        "name": "Scallops",
+        "price": 15.99
+    },
+    "47111288": {
+        "name": "Cooked Prawns",
+        "price": 10.99
+    },
+    "36290321": {
+        "name": "Vanilla Beans",
+        "price": 14.99
+    },
+    "89851272": {
+        "name": "Cod Fillet",
+        "price": 7.59
+    },
+    "61210332": {
+        "name": "Vanilla Extract",
+        "price": 25.99
+    },
+    "33050690": {
+        "name": "Guacamole",
+        "price": 3.99
+    },
+    "93460248": {
+        "name": "Pistachio Nuts",
+        "price": 25.5
+    },
+    "24840521": {
+        "name": "Multivitamins",
+        "price": 10.79
+    },
+    "53850232": {
+        "name": "Pine Nuts",
+        "price": 15.24
+    },
+    "84460257": {
+        "name": "Potato Crisps",
+        "price": 3.99
+    },
+    "19691206": {
+        "name": "Watermelon",
+        "price": 6.99
+    },
+    "93620918": {
+        "name": "Dog Brush",
+        "price": 9.99
+    },
+    "80110293": {
+        "name": "Taco Shells",
+        "price": 2.29
+    },
+    "95451374": {
+        "name": "King Crab Legs",
+        "price": 25.99
+    },
+    "43360581": {
+        "name": "Soap",
+        "price": 2.99
+    },
+    "99661519": {
+        "name": "Rump Steak",
+        "price": 9.09
+    },
+    "19280264": {
+        "name": "Saffron",
+        "price": 18.19
+    },
+    "34220160": {
+        "name": "Fruit Juice",
+        "price": 2.99
+    },
+    "39850171": {
+        "name": "Tomato Sauce",
+        "price": 2.79
+    },
+    "75660062": {
+        "name": "Cake Mix",
+        "price": 1.59
+    },
+    "19320137": {
+        "name": "Hamburger Buns",
+        "price": 2.69
+    },
+    "75320157": {
+        "name": "Iced Tea",
+        "price": 5.49
+    },
+    "43060078": {
+        "name": "Baked Beans",
+        "price": 4.49
+    },
+    "74021659": {
+        "name": "Whole Turkey",
+        "price": 19.29
+    },
+    "48500104": {
+        "name": "Corn Chips",
+        "price": 3.69
+    },
+    "40290041": {
+        "name": "Baguette",
+        "price": 4.49
+    },
+    "22040091": {
+        "name": "Coffee",
+        "price": 7.99
+    },
+    "21217197": {
+        "name": "Strawberries",
+        "price": 2.99
+    },
+    "36520084": {
+        "name": "Almond Butter",
+        "price": 11.49
+    },
+    "53330116": {
+        "name": "Doughnuts",
+        "price": 2.99
+    },
+    "70831047": {
+        "name": "Pizza Buns",
+        "price": 4.29
+    },
+    "91791641": {
+        "name": "Whole Turkey",
+        "price": 19.29
+    },
+    "97571025": {
+        "name": "Lasagna",
+        "price": 6.99
+    },
+    "03310779": {
+        "name": "Sliced Ham",
+        "price": 4.29
+    },
+    "46300461": {
+        "name": "Washing Liquid",
+        "price": 11.99
+    },
+    "22230546": {
+        "name": "Kitchen Towels",
+        "price": 6.49
+    },
+    "65831250": {
+        "name": "Beef Roast",
+        "price": 16.11
+    },
+    "94340792": {
+        "name": "Vanilla Pudding",
+        "price": 3.69
+    },
+    "39990976": {
+        "name": "Fish Fingers",
+        "price": 4.79
+    },
+    "17850186": {
+        "name": "Macadamia Nuts",
+        "price": 29.99
+    },
+    "46700629": {
+        "name": "Cheddar Cheese",
+        "price": 4.99
+    },
+    "04700807": {
+        "name": "Whole Milk",
+        "price": 2.99
+    },
+    "13650209": {
+        "name": "Manuka Honey",
+        "price": 27.99
+    },
+    "07240218": {
+        "name": "Mayonnaise",
+        "price": 3.99
+    },
+    "72900222": {
+        "name": "Olive Oil",
+        "price": 5.19
+    },
+    "79511568": {
+        "name": "Turkey Breast",
+        "price": 9.45
+    },
+    "19361185": {
+        "name": "Raspberries",
+        "price": 4.99
+    },
+    "29760275": {
+        "name": "Salad Dressing",
+        "price": 2.19
+    },
+    "67981601": {
+        "name": "Whole Ham",
+        "price": 29.48
+    },
+    "01401554": {
+        "name": "Turkey Breast",
+        "price": 9.45
+    },
+    "71241548": {
+        "name": "T-bone Steak",
+        "price": 14.29
+    },
+    "01860955": {
+        "name": "Dry Dog Food",
+        "price": 13.99
+    },
+    "95191539": {
+        "name": "T-bone Steak",
+        "price": 14.29
+    },
+    "17491617": {
+        "name": "Whole Ham",
+        "price": 29.48
+    },
+    "12161591": {
+        "name": "Whole Chicken",
+        "price": 5.45
+    },
+    "18621587": {
+        "name": "Turkey Patties",
+        "price": 10.99
+    },
+    "67371570": {
+        "name": "Turkey Patties",
+        "price": 10.99
+    },
+    "21221521": {
+        "name": "Rump Steak",
+        "price": 9.09
+    },
+    "60811318": {
+        "name": "Filet Mignon",
+        "price": 12.99
+    },
+    "04620037": {
+        "name": "Bagels",
+        "price": 2.99
+    },
+    "70310931": {
+        "name": "Dry Cat Food",
+        "price": 14.99
+    },
+    "02351087": {
+        "name": "Asparagus",
+        "price": 2.99
+    },
+    "86220538": {
+        "name": "Dummies",
+        "price": 6.49
+    },
+    "75581367": {
+        "name": "King Crab Legs",
+        "price": 25.99
+    },
+    "45391057": {
+        "name": "Puff Pastry",
+        "price": 3.49
+    },
+    "00250993": {
+        "name": "Frozen Pizza",
+        "price": 4.49
+    },
+    "48530613": {
+        "name": "Butter",
+        "price": 4.29
+    },
+    "12001101": {
+        "name": "Blueberries",
+        "price": 2.99
+    },
+    "56800364": {
+        "name": "Baby Formula",
+        "price": 33.99
+    },
+    "12950966": {
+        "name": "Fish Food",
+        "price": 5.49
+    },
+    "88250946": {
+        "name": "Dry Dog Food",
+        "price": 13.99
+    },
+    "69300516": {
+        "name": "Multivitamins",
+        "price": 10.79
+    },
+    "46980496": {
+        "name": "Light Bulb",
+        "price": 10.99
+    },
+    "87670509": {
+        "name": "Mouthwash",
+        "price": 5.79
+    },
+    "62971232": {
+        "name": "Brisket",
+        "price": 31.97
+    },
+    "11100485": {
+        "name": "Light Bulb",
+        "price": 10.99
+    },
+    "46080721": {
+        "name": "Parmesan Cheese",
+        "price": 4.69
+    },
+    "85201453": {
+        "name": "Pork Ribs",
+        "price": 13.25
+    },
+    "31970921": {
+        "name": "Dry Cat Food",
+        "price": 14.99
+    },
+    "38630392": {
+        "name": "Toilet Tissue",
+        "price": 13.09
+    },
+    "55850353": {
+        "name": "Baby Formula",
+        "price": 33.99
+    },
+    "13840907": {
+        "name": "Dog Brush",
+        "price": 9.99
+    },
+    "47361218": {
+        "name": "Beef Patties",
+        "price": 7.99
+    },
+    "67890576": {
+        "name": "Razors",
+        "price": 15.99
+    },
+    "73930860": {
+        "name": "Chicken Nuggets",
+        "price": 5.29
+    },
+    "60461162": {
+        "name": "Oranges",
+        "price": 4.99
+    },
+    "99021139": {
+        "name": "Kiwis",
+        "price": 4.99
+    },
+    "19090658": {
+        "name": "Cookie Dough",
+        "price": 4.99
+    },
+    "43960026": {
+        "name": "Almond Butter",
+        "price": 11.49
+    },
+    "66111221": {
+        "name": "Pork Sausages",
+        "price": 4.19
+    },
+    "74247332": {
+        "name": "Turkey Mince",
+        "price": 4.49
+    },
+    "97111665": {
+        "name": "Whole Turkey",
+        "price": 19.29
+    },
+    "76711145": {
+        "name": "Lettuce",
+        "price": 1.59
+    },
+    "01830743": {
+        "name": "Potato Salad",
+        "price": 2.59
+    },
+    "05321445": {
+        "name": "Pork Chops",
+        "price": 5.99
+    },
+    "67990856": {
+        "name": "Cat Litter",
+        "price": 9.79
+    },
+    "17840705": {
+        "name": "Houmous",
+        "price": 3.99
+    },
+    "37631291": {
+        "name": "Cooked Prawns",
+        "price": 10.99
+    },
+    "68620844": {
+        "name": "Cat Litter",
+        "price": 9.79
+    },
+    "01510607": {
+        "name": "Bin Bags",
+        "price": 7.29
+    },
+    "96591123": {
+        "name": "Grapes",
+        "price": 5.98
+    },
+    "91541352": {
+        "name": "Jumbo Prawns",
+        "price": 14.99
+    },
+    "49830422": {
+        "name": "Nappies",
+        "price": 24.99
+    },
+    "46570765": {
+        "name": "Salami",
+        "price": 5.49
+    },
+    "93061308": {
+        "name": "Filet Mignon",
+        "price": 12.99
+    },
+    "89571347": {
+        "name": "Jumbo Prawns",
+        "price": 14.99
+    },
+    "86390828": {
+        "name": "Bird Seed",
+        "price": 6.79
+    },
+    "36971152": {
+        "name": "Mangoes",
+        "price": 3.99
+    },
+    "47371262": {
+        "name": "Beef Roast",
+        "price": 16.11
+    },
+    "79660563": {
+        "name": "Razors",
+        "price": 15.99
+    },
+    "23420380": {
+        "name": "Toilet Tissue",
+        "price": 13.09
+    },
+    "95280714": {
+        "name": "Orange Juice",
+        "price": 3.99
+    },
+    "97610731": {
+        "name": "Pepperoni",
+        "price": 3.99
+    },
+    "99141011": {
+        "name": "Custard Tart",
+        "price": 3.69
+    },
+    "04461005": {
+        "name": "Ice Cream Sticks",
+        "price": 3.99
+    },
+    "92840140": {
+        "name": "Hot Dog Buns",
+        "price": 2.69
+    },
+    "43991099": {
+        "name": "Saffron",
+        "price": 18.19
+    },
+    "53440815": {
+        "name": "Apple Pie",
+        "price": 7.99
+    },
+    "19860312": {
+        "name": "Truffle Oil",
+        "price": 23.99
+    },
+    "57240558": {
+        "name": "Cling Film",
+        "price": 3.99
+    },
+    "11710981": {
+        "name": "Frozen Chips",
+        "price": 2.79
+    },
+    "31400756": {
+        "name": "Prosciutto",
+        "price": 5.69
+    },
+    "61720688": {
+        "name": "Greek Yoghurt",
+        "price": 5.49
+    },
+    "62380010": {
+        "name": "Aged Balsamic Vinegar",
+        "price": 12.59
+    },
+    "87570458": {
+        "name": "Fabric Softener",
+        "price": 4.99
+    },
+    "04050124": {
+        "name": "Flour",
+        "price": 2.49
+    },
+    "69781179": {
+        "name": "Potatoes",
+        "price": 2.5
+    },
+    "60081247": {
+        "name": "Basa Fillet",
+        "price": 7.99
+    },
+    "20980597": {
+        "name": "Sun Cream",
+        "price": 8.99
+    },
+    "16531468": {
+        "name": "Pork Ribs",
+        "price": 13.25
+    },
+    "30910478": {
+        "name": "Washing Liquid",
+        "price": 11.99
+    },
+    "18200379": {
+        "name": "Baby Wash",
+        "price": 3.99
+    },
+    "53511324": {
+        "name": "Beef Mince",
+        "price": 4.79
+    },
+    "98480838": {
+        "name": "Burritos",
+        "price": 3.99
+    },
+    "23261396": {
+        "name": "Lobster Tail",
+        "price": 28.99
+    },
+    "63391473": {
+        "name": "Ribeye Steak",
+        "price": 14.29
+    },
+    "90170416": {
+        "name": "Deodorant",
+        "price": 4.79
+    },
+    "31290661": {
+        "name": "Eggs",
+        "price": 2.79
+    },
+    "95941493": {
+        "name": "Scallops",
+        "price": 15.99
+    },
+    "75881382": {
+        "name": "Lobster Tail",
+        "price": 28.99
+    },
+    "54391079": {
+        "name": "Apples",
+        "price": 4.59
+    },
+    "77870407": {
+        "name": "Batteries",
+        "price": 5.49
+    },
+    "11981480": {
+        "name": "Ribeye Steak",
+        "price": 14.29
+    },
+    "33711034": {
+        "name": "Mozzarella Sticks",
+        "price": 6.59
+    },
+    "39660633": {
+        "name": "Cheese Slices",
+        "price": 4.49
+    },
+    "76990670": {
+        "name": "French Onion Dip",
+        "price": 2.49
+    },
+    "20960285": {
+        "name": "Sourdough Bread",
+        "price": 3.99
+    },
+    "21640346": {
+        "name": "Walnuts",
+        "price": 7.49
+    }
+}
