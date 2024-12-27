@@ -113,16 +113,16 @@
         resetButton.addEventListener('click', reset);
 
         const startScanner = async () => {
-            const codeReader = new ZXing.BrowserMultiFormatReader();
-
             try {
-                const devices = await codeReader.listVideoInputDevices();
-                const backCamera = devices.find(device => device.label.toLowerCase().includes('back')) || devices[0];
-                const selectedDeviceId = backCamera?.deviceId;
+                const stream = await navigator.mediaDevices.getUserMedia({
+                    video: {
+                        facingMode: { exact: "environment" }
+                    }
+                });
+                videoElement.srcObject = stream;
 
-                if (!selectedDeviceId) throw new Error("No camera devices found");
-
-                await codeReader.decodeFromVideoDevice(selectedDeviceId, videoElement, async (result, err) => {
+                const codeReader = new ZXing.BrowserMultiFormatReader();
+                await codeReader.decodeFromVideoDevice(null, videoElement, async (result, err) => {
                     if (result && !scanningPaused) {
                         const code = result.text;
 
@@ -146,7 +146,8 @@
                     }
                 });
             } catch (error) {
-                console.error(error);
+                console.error('Camera error:', error);
+                alert("Unable to access the camera. Please ensure permissions are granted.");
             }
         };
 
