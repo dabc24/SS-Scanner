@@ -20,14 +20,15 @@
         <li>Visit the <a href="https://dabc24.github.io/SS-Scanner/">SS Scanner</a>.</li>
         <li>Use the scanner feature to check items from our comprehensive database.</li>
         <li>Compete to achieve the highest cart total in your Supermarket Sweep!</li>
+        <li>Buzzer/bell to buzz in.</li>
+        <li>Big shop items are randomly given a price between 50 and 300 when scanned.</li>
+        <li>Item number counter.</li>
     </ol>
     <h2>📂 Product Data Sample</h2>
     <p>The database features a wide array of items. Here are a few examples:</p>
      <h2>📝 TODO:</h2>
     <ul>
-        <li>Add Big Sweep item cards</li>
         <li>Timer: With seporate timers for each team</li>
-        <li>Buzzer to buzz in</li>
     </ul>
      <h2>⚠️ Known Issues:</h2>
     <ul>
