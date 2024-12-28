@@ -41,9 +41,6 @@
         <li><strong>Backend:</strong> JSON-based product "database"</li>
         <li><strong>Deployment:</strong> GitHub Pages</li>
     </ul>
-    <h2>📜 License</h2>
-    <p>
-        This project is licensed under the GNU General Public License v3.0. 
-    </p>
+    <a href='https://ko-fi.com/E1E418461H' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://storage.ko-fi.com/cdn/kofi6.png?v=6' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
 </body>
 </html>
