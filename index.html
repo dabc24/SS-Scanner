@@ -45,6 +45,10 @@
             font-weight: bold;
             margin-top: 10px;
         }
+        #item-counter {
+            margin-top: 10px;
+            font-weight: bold;
+        }
         button {
             margin-top: 20px;
             padding: 10px 20px;
@@ -57,6 +61,13 @@
         button:hover {
             background-color: #0056b3;
         }
+        #buzzer-button {
+            background-color: #FF6347;
+            margin-top: 10px;
+        }
+        #buzzer-button:hover {
+            background-color: #FF4500;
+        }
     </style>
 </head>
 <body>
@@ -64,10 +75,12 @@
         <video id="video" autoplay playsinline></video>
     </div>
     <div id="output">
+        <div id="item-counter">Items Scanned: 0</div>
         <div class="total" id="total">Total: £0.00</div>
         <div id="scanned-items"></div>
     </div>
     <button id="reset-button">Reset</button>
+    <button id="buzzer-button">Gameshow Buzzer</button>
 
     <script>
         const mockDatabasePath = './mock-database.json';
@@ -94,7 +107,9 @@
         const scannedItems = [];
         const scannedItemsContainer = document.getElementById('scanned-items');
         const totalContainer = document.getElementById('total');
+        const itemCounter = document.getElementById('item-counter');
         const resetButton = document.getElementById('reset-button');
+        const buzzerButton = document.getElementById('buzzer-button');
         const videoElement = document.getElementById('video');
 
         let total = 0;
@@ -102,6 +117,7 @@
 
         const beepSuccess = new Audio('./success-beep.mp3');
         const beepFail = new Audio('./error-beep.mp3');
+        const gameshowBuzzer = new Audio('./buzzer-sound.mp3');
 
         const updateUI = () => {
             scannedItemsContainer.innerHTML = '';
@@ -109,11 +125,12 @@
             scannedItems.forEach(item => {
                 const itemDiv = document.createElement('div');
                 itemDiv.classList.add('item');
-                itemDiv.innerHTML = `<span>${item.name}</span><span>$${item.price.toFixed(2)}</span>`;
+                itemDiv.innerHTML = `<span>${item.name}</span><span>£${item.price.toFixed(2)}</span>`;
                 scannedItemsContainer.appendChild(itemDiv);
                 total += item.price;
             });
             totalContainer.textContent = `Total: £${total.toFixed(2)}`;
+            itemCounter.textContent = `Items Scanned: ${scannedItems.length}`;
         };
 
         const reset = () => {
@@ -122,6 +139,10 @@
         };
 
         resetButton.addEventListener('click', reset);
+
+        buzzerButton.addEventListener('click', () => {
+            gameshowBuzzer.play();
+        });
 
         const startScanner = async () => {
             try {
